@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://b7ohwfubl0i84"]
+
+[ext_resource type="PackedScene" uid="uid://bfm43i5l8yajp" path="res://sun.tscn" id="2_5geqc"]
+
+[sub_resource type="Environment" id="Environment_6qkhj"]
+background_mode = 1
+
+[node name="Universe" type="Node3D"]
+
+[node name="Sun" parent="." instance=ExtResource("2_5geqc")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_6qkhj")

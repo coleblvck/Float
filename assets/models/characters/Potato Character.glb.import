@@ -1,0 +1,77 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://giygfvbvtph"
+path="res://.godot/imported/Potato Character.glb-7c1ef444c6ccc50a144a8cf862105bf9.scn"
+
+[deps]
+
+source_file="res://assets/models/characters/Potato Character.glb"
+dest_files=["res://.godot/imported/Potato Character.glb-7c1ef444c6ccc50a144a8cf862105bf9.scn"]
+
+[params]
+
+nodes/root_type="CharacterBody3D"
+nodes/root_name="player"
+nodes/apply_root_scale=true
+nodes/root_scale=1.0
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=1
+meshes/lightmap_texel_size=0.2
+meshes/force_disable_compression=false
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+animation/trimming=false
+animation/remove_immutable_tracks=true
+import_script/path=""
+_subresources={
+"meshes": {
+"Potato Character_Body": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/make_streamable": "",
+"save_to_file/path": "res://assets/models/characters/potato_body.res"
+},
+"Potato Character_Head": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/make_streamable": "",
+"save_to_file/path": "res://assets/models/characters/potato_head.res"
+},
+"Potato Character_LeftHand": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/make_streamable": "",
+"save_to_file/path": "res://assets/models/characters/potato_left_hand.res"
+},
+"Potato Character_RightHand": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/make_streamable": "",
+"save_to_file/path": "res://assets/models/characters/potato_right_hand.res"
+}
+}
+}
+gltf/naming_version=1
+gltf/embedded_image_handling=1

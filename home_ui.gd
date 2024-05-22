@@ -10,6 +10,7 @@ var player_origin: Node3D = Node3D.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	http_request.request_completed.connect(_on_request_completed)
 	make_request()
 
 
@@ -28,7 +29,6 @@ var satelites :Array
 var other_bodies :Array
 
 func make_request():
-	http_request.request_completed.connect(_on_request_completed)
 	http_request.request(url)
 
 func _on_request_completed(result, response_code, headers, body):

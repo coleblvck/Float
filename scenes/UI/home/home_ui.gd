@@ -1,8 +1,8 @@
 extends Control
 
 var url = "https://api.le-systeme-solaire.net/rest/bodies/"
-var universe = preload("res://universe.tscn").instantiate()
-var player :CharacterBody3D = preload("res://characters/player/player.tscn").instantiate()
+var universe = preload("res://scenes/universe.tscn").instantiate()
+var player :CharacterBody3D = preload("res://characters/Traveller.tscn").instantiate()
 var player_origin: Node3D = Node3D.new()
 @onready var http_request = $Button/HTTPRequest
 @onready var tree :Tree = $Tree
@@ -64,17 +64,38 @@ func add_bodies_to_tree():
 	
 func load_objects():
 	player.position = Vector3(-122.8, 29.967, 0)
+	player.role = "player"
+	load_player_utils(player)
 	universe.add_child(player)
-	var ratio :float = 700000
+	var distance_ratio :float = 150000
+	var scale_ratio :float = 159
 	for planet in planets:
 		if planet.englishName == "Earth":
 			var orbit :Area3D = load("res://scenes/orbiting/orbit.tscn").instantiate()
-			var planet_scene :CharacterBody3D = load("res://planets/Earth.tscn").instantiate()
-			var planet_distance :float = planet.semimajorAxis / ratio
+			var planet_scene :CharacterBody3D = load("res://scenes/locations/planets/terre/Earth.tscn").instantiate()
+			var planet_distance :float = planet.semimajorAxis / distance_ratio
 			var orbit_speed = planet.sideralOrbit
 			orbit.rotation_speed = 0
-			planet_scene.scale = Vector3(20, 20, 20)
+			var planet_scale = planet.meanRadius/scale_ratio
+			planet_scene.scale = Vector3(planet_scale, planet_scale, planet_scale)
 			planet_scene.position = Vector3(0, 0, planet_distance)
+			planet_scene.surface_gravity = planet.gravity
+			for moon in satelites:
+				if moon.aroundPlanet.planet == planet.id:
+					var moon_orbit :Area3D = load("res://scenes/orbiting/orbit.tscn").instantiate()
+					var moon_scene :CharacterBody3D = load("res://scenes/locations/moons/lune/Moon.tscn").instantiate()
+					var moon_distance :float = moon.semimajorAxis / distance_ratio
+					var moon_orbit_speed = moon.sideralOrbit
+					moon_orbit.rotation_speed = 0
+					var moon_scale = moon.meanRadius / planet.meanRadius
+					moon_scene.scale = Vector3(moon_scale, moon_scale, moon_scale)
+					moon_scene.position = Vector3(moon_distance, 0, 0)
+					moon_scene.surface_gravity = moon.gravity
+					moon_orbit.add_child(moon_scene)
+					planet_scene.add_child(moon_orbit)
 			orbit.add_child(planet_scene)
 			universe.add_child(orbit)
 			
+func load_player_utils(player :CharacterBody3D):
+	var flashlight = load("res://scenes/utilities/Flashlight.tscn").instantiate()
+	player.add_child(flashlight)

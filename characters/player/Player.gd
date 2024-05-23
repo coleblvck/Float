@@ -2,7 +2,8 @@ extends CharacterBody3D
 
 
 #Player Variables
-var move_speed :float = 16
+var role :String
+var move_speed :float = 10
 var space_move_speed :float = 0.5
 var jump_force :float = 250
 var rotation_speed :float = 0.05

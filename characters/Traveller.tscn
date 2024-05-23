@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://s7hybxd1crm8"]
+
+[ext_resource type="ArrayMesh" uid="uid://b75emyico6pti" path="res://assets/models/characters/Traveller.res" id="1_3mtwr"]
+[ext_resource type="Script" path="res://characters/Traveller.gd" id="1_sdd6p"]
+[ext_resource type="PackedScene" uid="uid://ciojgibbs27wt" path="res://scenes/utilities/PlayerCamera.tscn" id="3_retoi"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_o1gjn"]
+points = PackedVector3Array(0.649654, 4.01393, 0.598824, -3.02689, 0.623271, -0.0833586, -0.65859, -5.14727, -0.971926, 0.967981, 3.43392, -3.48659, 3.03994, 0.623271, 0.0643376, -0.95433, 3.43392, -3.48659, -0.73918, -0.831739, 0.922596, 0.67224, -5.29559, -0.823274, -1.04338, 3.50289, 0.986308, 0.886514, -0.694555, 0.918356, 0.636229, 3.07842, 1.2644, -1.39853, 3.73056, -1.41454, -0.65859, -5.14727, -0.527403, 0.930049, 3.98778, -1.1153, -3.02689, 0.770663, 0.212512, -1.1022, 2.69418, 1.2483, 0.967981, 3.13821, -3.48659, 3.03994, 0.918982, -0.0833586, -0.95433, 3.13821, -3.48659, 0.67224, -5.14727, -0.971926, 0.52437, -5.14727, -0.527403, -0.91791, 3.99511, -1.11542, 3.03994, 0.623271, -0.0833586, 1.19862, 3.78877, -1.1144, 1.04906, 3.47219, 0.970962, 2.89148, 0.623271, 0.212512, -0.636331, 4.01612, 0.599609, -3.02689, 0.918982, -0.0833586, -0.484705, 3.65472, 1.13295, -3.02689, 0.623271, 0.212512, -0.874938, -0.694863, 0.922876, 0.67224, -4.99895, -0.527403)
+
+[node name="Traveller" type="CharacterBody3D"]
+script = ExtResource("1_sdd6p")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+mesh = ExtResource("1_3mtwr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_o1gjn")
+
+[node name="Player Camera" parent="." instance=ExtResource("3_retoi")]

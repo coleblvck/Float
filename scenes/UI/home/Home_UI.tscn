@@ -1,0 +1,55 @@
+[gd_scene load_steps=3 format=3 uid="uid://buvsbxjdbr7ag"]
+
+[ext_resource type="Theme" uid="uid://tmhfxolc8cvl" path="res://scenes/UI/home/Home_UI.theme" id="1_jbsub"]
+[ext_resource type="Script" path="res://scenes/UI/home/Home_UI.gd" id="2_jnqux"]
+
+[node name="HomeUI" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1159.0
+offset_bottom = 660.0
+theme = ExtResource("1_jbsub")
+script = ExtResource("2_jnqux")
+
+[node name="PlayButton" type="Button" parent="."]
+layout_mode = 2
+offset_left = 64.0
+offset_top = 44.0
+offset_right = 392.0
+offset_bottom = 143.0
+theme = ExtResource("1_jbsub")
+text = "Play"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 2
+offset_left = 552.0
+offset_top = 276.0
+offset_right = 1057.0
+offset_bottom = 475.0
+
+[node name="Tree" type="Tree" parent="."]
+layout_mode = 0
+offset_left = 564.0
+offset_top = 45.0
+offset_right = 1103.0
+offset_bottom = 596.0
+
+[node name="LoadProgressBar" type="ProgressBar" parent="."]
+layout_mode = 0
+offset_left = 79.0
+offset_top = 429.0
+offset_right = 450.0
+offset_bottom = 525.0
+value = 30.0
+show_percentage = false
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 79.0
+offset_top = 219.0
+offset_right = 452.0
+offset_bottom = 402.0
+theme = ExtResource("1_jbsub")
+text = "FLOAT	"
+
+[connection signal="pressed" from="PlayButton" to="." method="_on_button_pressed"]

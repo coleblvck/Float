@@ -1,11 +1,10 @@
 extends CharacterBody3D
-
+class_name Player
 
 #Player Variables
-var role :String
 var move_speed :float = 10
 var space_move_speed :float = 0.5
-var jump_force :float = 250
+var jump_force :float = 100
 var rotation_speed :float = 0.05
 
 #Parent Variables
@@ -15,26 +14,51 @@ var up : Vector3
 var gravity_force :float
 var gravitational_velocity :float
 var aligned_rotation :Transform3D
-var location_node :CharacterBody3D
-var location_old_position: Vector3
-var location_old_rotation: Vector3
-var old_marker_position: Vector3
-var marker :Node3D
+var location_node :Location
+
+
+var universe :Node3D
+var in_vehicle :bool = false
+var vehicle :CharacterBody3D
 @onready var flashlight :SpotLight3D = $Flashlight
+@onready var player_space :Area3D = $Space
 
 
+func _on_Area_body_entered(body):
+	pass
 
+func enter_vehicle(body):
+	body.current_player = self
+	body.enter(self)
+	in_vehicle = true
+	pass
+
+func exit_vehicle():
+	vehicle.exit(self, universe)
+	in_vehicle = false
+	vehicle = null
 
 func _ready():
-	pass
+	player_space.body_entered.connect(_on_Area_body_entered)
 
 
 func _physics_process(delta):
-	toggle_flashlight()
-	if location != "universe":
-		planet_movement(delta)
+	var overlapping_bodies = player_space.get_overlapping_bodies()
+	
+	if !in_vehicle:
+		if Input.is_action_just_pressed("pause"):
+			for overlapping_body in overlapping_bodies:
+				if overlapping_body.role == "vehicle":
+					vehicle = overlapping_body
+					enter_vehicle(overlapping_body)
+		toggle_flashlight()
+		if location != "universe":
+			planet_movement(delta)
+		else:
+			space_movement(delta)
 	else:
-		space_movement(delta)
+		if Input.is_action_just_pressed("pause"):
+			exit_vehicle()
 		
 func toggle_flashlight():
 	if Input.is_action_just_pressed("toggle_light"):
@@ -48,8 +72,6 @@ func toggle_flashlight():
 			flashlight.show()
 		
 func space_movement(delta):
-	if Input.is_action_just_pressed("pause"):
-		get_tree().paused = true
 	var movement_vector = Input.get_vector("movement_left", "movement_right","movement_backward", "movement_forward").normalized()
 	var movement = transform.basis * Vector3(movement_vector.x, 0, -movement_vector.y)
 	if movement:
@@ -78,31 +100,15 @@ func planet_movement(delta):
 	
 	
 	var collision_count = get_slide_collision_count()
+	gravitational_velocity = gravity_force
 	for i in collision_count:
 		var collision = get_slide_collision(i)
-		if collision.get_collider().type == "planet":
-				gravitational_velocity = gravity_force
+		if collision.get_collider() is Location:
+				gravitational_velocity = 0
 		else:
 			gravitational_velocity += gravity_force
 	
-	var position_radius = global_position.distance_to(location_node.global_position)
-	var centripetal_velocity = (location_node.global_position - location_old_position) / delta
-	var planet_rotation_direction :Vector3 = (location_node.global_transform.basis.get_euler() - location_old_rotation)
-	var planet_rotation_distance = planet_rotation_direction / (180 * 3.142 * position_radius)
-	var planet_rotation_velocity = planet_rotation_distance / delta
-	var marker_velocity = (marker.global_position - old_marker_position) / delta
-	marker.global_position = global_position
-	old_marker_position = marker.global_position
-	
-	
-	
-	
-	#var centrifugal_force = centrifugal_angle * centrifugal_angle / position_radius
-	location_old_position = location_node.global_position
-	location_old_rotation = location_node.global_rotation
-
 	velocity = gravity_direction * gravitational_velocity
-	velocity += marker_velocity
 	
 	up_direction = -gravity_direction.normalized()
 	var movement_vector = Input.get_vector("movement_left", "movement_right","movement_backward", "movement_forward").normalized()
@@ -114,7 +120,7 @@ func planet_movement(delta):
 	global_transform.basis = aligned_rotation.basis 
 	if is_on_floor():
 		if Input.is_action_just_pressed("movement_jump"):
-			velocity += -gravity_direction * jump_force
+			velocity += -gravity_direction * (jump_force + gravity_force)
 		
 	if Input.is_action_pressed("fly"):
 		velocity += -(gravity_direction * (move_speed + gravity_force))

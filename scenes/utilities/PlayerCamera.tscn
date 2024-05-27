@@ -1,5 +1,5 @@
 [gd_scene format=3 uid="uid://ciojgibbs27wt"]
 
-[node name="Player Camera" type="Camera3D"]
+[node name="PlayerCamera" type="Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 0.927138, 0.37472, 0, -0.37472, 0.927138, 0, 0.640852, 0.819992)
-current = true
+far = 40000.0

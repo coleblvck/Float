@@ -13,8 +13,8 @@ dest_files=["res://.godot/imported/Earth.glb-f3e066bd3e8590e3fa195d3300b9283d.sc
 
 [params]
 
-nodes/root_type=""
-nodes/root_name=""
+nodes/root_type="Node3D"
+nodes/root_name="Earth"
 nodes/apply_root_scale=true
 nodes/root_scale=1.0
 meshes/ensure_tangents=true
@@ -31,7 +31,7 @@ animation/remove_immutable_tracks=true
 import_script/path=""
 _subresources={
 "meshes": {
-"Earth_Icosphere": {
+"Earth_Earth": {
 "generate/lightmap_uv": 0,
 "generate/lods": 0,
 "generate/shadow_meshes": 0,
@@ -41,7 +41,7 @@ _subresources={
 "save_to_file/make_streamable": "",
 "save_to_file/path": "res://assets/models/bodies/planets/earth/Earth_Earth.res"
 },
-"Earth_Icosphere_001": {
+"Earth_Water": {
 "generate/lightmap_uv": 0,
 "generate/lods": 0,
 "generate/shadow_meshes": 0,

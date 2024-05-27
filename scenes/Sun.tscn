@@ -1,0 +1,58 @@
+[gd_scene load_steps=6 format=3 uid="uid://bfm43i5l8yajp"]
+
+[sub_resource type="Gradient" id="Gradient_dk67k"]
+offsets = PackedFloat32Array(0.646341, 0.987805, 1)
+colors = PackedColorArray(0.657809, 0.191916, 0.129851, 1, 0, 0, 0, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_37ihw"]
+gradient = SubResource("Gradient_dk67k")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8he82"]
+angle_max = 360.0
+direction = Vector3(0, 1, 0)
+spread = 0.0
+initial_velocity_min = 1.0
+initial_velocity_max = 5.0
+angular_velocity_max = 40.0
+gravity = Vector3(0, 0, 0)
+linear_accel_min = 1.0
+linear_accel_max = 5.0
+scale_min = 4.0
+scale_max = 40.0
+color_initial_ramp = SubResource("GradientTexture1D_37ihw")
+turbulence_noise_speed = Vector3(0, 1, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8inn5"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.375703, 0.223714, 0.110732, 1)
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_8w318"]
+material = SubResource("StandardMaterial3D_8inn5")
+
+[node name="Node3D" type="Node3D"]
+
+[node name="SunLight" type="OmniLight3D" parent="."]
+light_color = Color(0.999999, 0.92958, 0.919212, 1)
+light_energy = 1500.0
+shadow_enabled = true
+shadow_bias = 4.0
+shadow_normal_bias = 4.0
+shadow_blur = 0.0
+omni_range = 8000.0
+
+[node name="SunFireParticle" type="GPUParticles3D" parent="."]
+amount = 1000
+lifetime = 0.5
+randomness = 1.0
+local_coords = true
+draw_order = 3
+process_material = SubResource("ParticleProcessMaterial_8he82")
+draw_pass_1 = SubResource("QuadMesh_8w318")

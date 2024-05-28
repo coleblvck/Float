@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bgnytwwviturw"]
+[gd_scene load_steps=16 format=3 uid="uid://bgnytwwviturw"]
 
 [ext_resource type="Script" path="res://scenes/vehicles/springtail/Springtail.gd" id="1_yalyn"]
 [ext_resource type="ArrayMesh" uid="uid://bllaga0uxu7in" path="res://assets/models/vehicles/springtail/Vehicle.res" id="1_yqni5"]
@@ -20,6 +20,9 @@ points = PackedVector3Array(-0.79946, 1.01575, 0.633051, -0.745985, 0.742424, -0
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_tfw0h"]
 points = PackedVector3Array(0.762989, 0.743616, -0.589196, 0.765324, 0.76025, 0.665579, 0.344617, 1.309, 0.407436, 0.818431, 1.01575, -0.562597, 0.344617, 1.309, -0.314364, 0.615398, 0.744929, 0.633051, 0.841014, 0.970595, 0.587957, 0.615398, 0.744929, -0.63031, 0.570286, 1.33155, 0.407436, 0.491106, 1.34988, -0.309252, 0.864047, 0.790528, -0.143567, 0.700841, 1.01754, 0.663686, 0.722297, 0.99607, -0.661705, 0.808207, 0.80309, -0.662809, 0.362756, 1.35479, 0.338157, 0.818431, 1.03824, -0.427171, 0.824098, 0.746849, 0.293427, 0.637875, 0.722317, 0.475149, 0.434895, 1.17359, -0.472408, 0.818431, 1.03824, 0.429913, 0.862117, 0.895316, -0.348008, 0.863977, 0.832058, 0.353372, 0.637875, 0.880277, -0.675546, 0.637875, 0.790024, 0.678146, 0.750789, 1.06078, -0.63031, 0.795901, 1.01575, 0.65567, 0.530009, 1.25235, 0.513838, 0.434895, 1.15097, 0.520244, 0.637875, 0.722317, -0.472408, 0.558677, 1.30472, -0.263193, 0.361562, 1.35623, -0.252337, 0.44656, 1.31332, -0.378457)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_swcta"]
+size = Vector3(3, 1, 4)
 
 [node name="Springtail" type="CharacterBody3D"]
 script = ExtResource("1_yalyn")
@@ -61,4 +64,10 @@ mesh = ExtResource("8_kt0qs")
 mesh = ExtResource("9_tcnm1")
 
 [node name="PlayerCamera" parent="." instance=ExtResource("10_edsil")]
-transform = Transform3D(1, 0, 0, 0, 0.970296, 0.241922, 0, -0.241922, 0.970296, 0, 2.3, 2.5)
+transform = Transform3D(1, 0, 0, 0, 0.937937, 0.346805, 0, -0.346805, 0.937937, 0, 2.3, 3.33151)
+
+[node name="Space" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Space"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.970395, 0)
+shape = SubResource("BoxShape3D_swcta")

@@ -16,7 +16,7 @@ func setup_atmosphere_area(atmosphere: Area3D):
 	body_atmosphere.body_exited.connect(_on_Area_body_exited)
 
 func _on_Area_body_entered(body):
-	if body is Player:
+	if body is Character:
 		body.set_location(name)
 		body.gravity_force = surface_gravity
 		body.gravitational_velocity = surface_gravity
@@ -24,5 +24,5 @@ func _on_Area_body_entered(body):
 		
 
 func _on_Area_body_exited(body):
-	if body is Player:
+	if body is Character:
 		body.set_location("universe")

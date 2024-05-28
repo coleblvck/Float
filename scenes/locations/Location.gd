@@ -4,6 +4,7 @@ class_name Location
 var body_liquid :MeshInstance3D
 var body_atmosphere :Area3D
 var surface_gravity :float
+var location :String
 
 	
 func _process(delta):
@@ -18,6 +19,7 @@ func setup_atmosphere_area(atmosphere: Area3D):
 func _on_Area_body_entered(body):
 	if body is Character:
 		body.set_location(name)
+		body.in_space = false
 		body.gravity_force = surface_gravity
 		body.gravitational_velocity = surface_gravity
 		body.location_node = self
@@ -26,3 +28,4 @@ func _on_Area_body_entered(body):
 func _on_Area_body_exited(body):
 	if body is Character:
 		body.set_location("universe")
+		body.in_space = true

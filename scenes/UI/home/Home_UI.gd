@@ -1,13 +1,10 @@
 extends Control
-
-var url = "https://api.le-systeme-solaire.net/rest/bodies/"
 var universe = preload("res://scenes/Universe.tscn").instantiate()
 var player :CharacterBody3D = preload("res://scenes/vehicles/springtail/Springtail.tscn").instantiate()
 var player_origin: Node3D = Node3D.new()
 var springtail :CharacterBody3D = preload("res://scenes/vehicles/springtail/Springtail.tscn").instantiate()
 @onready var tree :Tree = $Tree
 @onready var play_button = $PlayButton
-@onready var load_progress_bar = $LoadProgressBar
 
 
 # Called when the node enters the scene tree for the first time.

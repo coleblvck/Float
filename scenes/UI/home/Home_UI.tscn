@@ -13,10 +13,10 @@ script = ExtResource("2_jnqux")
 
 [node name="PlayButton" type="Button" parent="."]
 layout_mode = 2
-offset_left = 64.0
-offset_top = 44.0
-offset_right = 392.0
-offset_bottom = 143.0
+offset_left = 107.0
+offset_top = 196.0
+offset_right = 435.0
+offset_bottom = 295.0
 theme = ExtResource("1_jbsub")
 text = "Play"
 
@@ -34,21 +34,12 @@ offset_top = 45.0
 offset_right = 1103.0
 offset_bottom = 596.0
 
-[node name="LoadProgressBar" type="ProgressBar" parent="."]
-layout_mode = 0
-offset_left = 79.0
-offset_top = 429.0
-offset_right = 450.0
-offset_bottom = 525.0
-value = 30.0
-show_percentage = false
-
 [node name="RichTextLabel2" type="RichTextLabel" parent="."]
 layout_mode = 0
-offset_left = 79.0
-offset_top = 219.0
-offset_right = 452.0
-offset_bottom = 402.0
+offset_left = 91.0
+offset_top = 328.0
+offset_right = 464.0
+offset_bottom = 511.0
 theme = ExtResource("1_jbsub")
 text = "FLOAT	"
 

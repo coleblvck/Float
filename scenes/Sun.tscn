@@ -40,8 +40,8 @@ material = SubResource("StandardMaterial3D_8inn5")
 [node name="Node3D" type="Node3D"]
 
 [node name="SunLight" type="OmniLight3D" parent="."]
-light_color = Color(0.999999, 0.92958, 0.919212, 1)
 light_energy = 1500.0
+light_specular = 5.0
 shadow_enabled = true
 shadow_bias = 4.0
 shadow_normal_bias = 4.0

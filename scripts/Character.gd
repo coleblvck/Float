@@ -2,7 +2,7 @@ extends CharacterBody3D
 class_name Character
 
 #Player Variables
-var move_speed :float = 10
+var move_speed :float = 2
 var space_move_speed :float = 0.5
 var jump_force :float = 100
 var rotation_speed :float = 0.05
@@ -20,8 +20,8 @@ var location_node :Location
 var universe :Node3D
 var in_vehicle :bool = false
 var vehicle :CharacterBody3D
-@onready var flashlight :SpotLight3D = $Flashlight
 @onready var proximity_space :Area3D = $Space
+#@onready var ray :RayCast3D = $Ray
 
 
 func _on_Area_body_entered(body):
@@ -38,27 +38,14 @@ func exit_vehicle():
 	in_vehicle = false
 	vehicle = null
 
-func _ready():
+func init_character():
 	proximity_space.body_entered.connect(_on_Area_body_entered)
 
 
 func _physics_process(delta):
-	var overlapping_bodies = proximity_space.get_overlapping_bodies()
-	
-	toggle_lights()
-	move(delta)
-	
-		
-func toggle_lights():
-	if Input.is_action_just_pressed("toggle_light"):
-		if flashlight.visible:
-			if flashlight.light_energy < 10:
-				flashlight.light_energy += 3
-			else:
-				flashlight.light_energy = 1
-				flashlight.hide()
-		else:
-			flashlight.show()
+	#var overlapping_bodies = proximity_space.get_overlapping_bodies()
+	pass
+
 		
 func space_movement(delta):
 	var movement_vector = Input.get_vector("movement_left", "movement_right","movement_backward", "movement_forward").normalized()
@@ -96,8 +83,12 @@ func planet_movement(delta):
 				gravitational_velocity = 0
 		else:
 			gravitational_velocity += gravity_force
-	
-	velocity = gravity_direction * gravitational_velocity
+	align_rotation_with_gravity(global_transform, gravity_direction)
+		
+	global_transform = global_transform.interpolate_with(aligned_rotation, 5 * delta)
+			
+	velocity = lerp(velocity, Vector3(0, 0, 0), delta * 10)
+	velocity += gravity_direction * gravitational_velocity
 	
 	#up_direction = -gravity_direction.normalized()
 	var movement_vector = Input.get_vector("movement_left", "movement_right","movement_backward", "movement_forward").normalized()
@@ -105,8 +96,8 @@ func planet_movement(delta):
 	if movement:
 		velocity += movement * move_speed
 	
-	align_rotation_with_gravity(global_transform, gravity_direction)
-	global_transform = global_transform.interpolate_with(aligned_rotation, 5 * delta) 
+	
+	 
 	if is_on_floor():
 		if Input.is_action_just_pressed("movement_jump"):
 			velocity += -gravity_direction * (jump_force + gravity_force)
@@ -119,6 +110,12 @@ func planet_movement(delta):
 		
 	if Input.is_action_pressed("rotate_right"):
 		rotate_object_local(Vector3(0, 1, 0), -rotation_speed)
+	
+	if Input.is_action_pressed("rotate_forwards"):
+		rotate_object_local(Vector3(1, 0, 0), -rotation_speed)
+		
+	if Input.is_action_pressed("rotate_backwards"):
+		rotate_object_local(Vector3(1, 0, 0), rotation_speed)
 		
 	floor_stop_on_slope = true
 		
@@ -128,7 +125,7 @@ func planet_movement(delta):
 
 func align_rotation_with_gravity(xform, new_y):
 	xform.basis.y = -new_y
-	xform.basis.x = -xform.basis.z.cross(new_y)
+	xform.basis.x = xform.basis.z.cross(new_y)
 	xform.basis = xform.basis.orthonormalized()
 	aligned_rotation = xform
 	

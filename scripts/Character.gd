@@ -5,7 +5,7 @@ class_name Character
 var move_speed :float = 2
 var space_move_speed :float = 0.5
 var jump_force :float = 100
-var rotation_speed :float = 0.05
+var rotation_speed :float = 0.02
 
 #Parent Variables
 var gravity_direction: Vector3
@@ -62,33 +62,10 @@ func space_movement(delta):
 	if Input.is_action_pressed("rotate_right"):
 		rotate_object_local(Vector3(0, 1, 0), -rotation_speed)
 		
-	if Input.is_action_pressed("rotate_forwards"):
-		rotate_object_local(Vector3(1, 0, 0), -rotation_speed)
-		
-	if Input.is_action_pressed("rotate_backwards"):
-		rotate_object_local(Vector3(1, 0, 0), rotation_speed)
 		
 	move_and_collide(velocity * delta)
 	
 func planet_movement(delta):
-	set_gravity()
-	
-	
-	
-	var collision_count = get_slide_collision_count()
-	gravitational_velocity = gravity_force
-	for i in collision_count:
-		var collision = get_slide_collision(i)
-		if collision.get_collider() is Location:
-				gravitational_velocity = 0
-		else:
-			gravitational_velocity += gravity_force
-	align_rotation_with_gravity(global_transform, gravity_direction)
-		
-	global_transform = global_transform.interpolate_with(aligned_rotation, 5 * delta)
-			
-	velocity = lerp(velocity, Vector3(0, 0, 0), delta * 10)
-	velocity += gravity_direction * gravitational_velocity
 	
 	#up_direction = -gravity_direction.normalized()
 	var movement_vector = Input.get_vector("movement_left", "movement_right","movement_backward", "movement_forward").normalized()
@@ -123,11 +100,6 @@ func planet_movement(delta):
 	
 
 
-func align_rotation_with_gravity(xform, new_y):
-	xform.basis.y = -new_y
-	xform.basis.x = xform.basis.z.cross(new_y)
-	xform.basis = xform.basis.orthonormalized()
-	aligned_rotation = xform
 	
 	
 func move(delta):
@@ -136,8 +108,24 @@ func move(delta):
 	else:
 		space_movement(delta)
 
+
+func apply_gravity(delta):
+	set_gravity()
 	
-	
+	var collision_count = get_slide_collision_count()
+	gravitational_velocity = gravity_force
+	for i in collision_count:
+		var collision = get_slide_collision(i)
+		if collision.get_collider() is Location:
+				gravitational_velocity = 0
+		else:
+			gravitational_velocity += gravity_force
+	align_rotation_with_gravity(global_transform, gravity_direction)
+		
+	global_transform = global_transform.interpolate_with(aligned_rotation, 5 * delta)
+			
+	velocity = lerp(velocity, Vector3(0, 0, 0), delta * 10)
+	velocity += gravity_direction * gravitational_velocity
 
 func set_gravity():
 	if in_space:
@@ -145,6 +133,12 @@ func set_gravity():
 	else:
 		gravity_direction = position.direction_to(location_node.global_transform.origin)
 		up_direction = -gravity_direction
+
+func align_rotation_with_gravity(xform, new_y):
+	xform.basis.y = -new_y
+	xform.basis.x = xform.basis.z.cross(new_y)
+	xform.basis = xform.basis.orthonormalized()
+	aligned_rotation = xform
 
 func set_location(l):
 	location = l

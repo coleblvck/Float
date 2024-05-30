@@ -5,7 +5,7 @@ class_name Character
 var move_speed :float = 2
 var space_move_speed :float = 0.5
 var jump_force :float = 100
-var rotation_speed :float = 0.02
+var rotation_speed :float = 0.01
 
 #Parent Variables
 var gravity_direction: Vector3

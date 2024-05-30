@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://wbumtoh2ef3m"]
+
+[ext_resource type="Script" path="res://scenes/vehicles/springtail/CameraPivot.gd" id="1_f12f0"]
+[ext_resource type="PackedScene" uid="uid://ciojgibbs27wt" path="res://scenes/utilities/PlayerCamera.tscn" id="2_ddtiy"]
+
+[node name="CameraPivot" type="Node3D"]
+script = ExtResource("1_f12f0")
+
+[node name="PlayerCamera" parent="." instance=ExtResource("2_ddtiy")]
+transform = Transform3D(1, 0, 0, 0, 0.876281, 0.4818, 0, -0.4818, 0.876281, 0, 2.3, 3.52004)

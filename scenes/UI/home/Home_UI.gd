@@ -38,9 +38,7 @@ func add_bodies_to_tree():
 	
 	
 func load_objects():
-	player.position = Vector3(-122.8, 29.967, 0)
-	load_player_utils(player)
-	universe.add_child(player)
+	load_player(player)
 	#springtail.position = Vector3(22.41635, -43.78969, 2895.787)
 	#universe.add_child(springtail)
 	
@@ -49,7 +47,7 @@ func load_objects():
 		var planet :Planet = load("res://scenes/locations/planets/%s.tscn" %planet_name).instantiate()
 		universe.add_child(planet)
 		
-func load_player_utils(player_body :CharacterBody3D):
-	var flashlight = load("res://scenes/utilities/Flashlight.tscn").instantiate()
-	player_body.add_child(flashlight)
+func load_player(player_body :CharacterBody3D):
+	player_body.position = Vector3(-122.8, 29.967, 0)
 	player_body.universe = universe
+	universe.add_child(player_body)

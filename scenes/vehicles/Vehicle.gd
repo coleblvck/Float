@@ -26,8 +26,8 @@ func control_vehicle(delta):
 	toggles()
 	
 func move(delta):
-	if !in_space:
-		velocity += -gravity_direction * gravity_force
+	#if !in_space:
+	#	velocity += -gravity_direction * gravity_force
 	if Input.is_action_pressed("movement_forward"):
 		velocity += -transform.basis.z * move_speed
 	if Input.is_action_pressed("movement_backward"):
@@ -38,11 +38,12 @@ func move(delta):
 		if Input.is_action_pressed("movement_right"):
 			rotate_object_local(Vector3(0, 1, 0), -rotation_speed)
 		if Input.is_action_pressed("rotate_forwards"):
-			rotate_object_local(Vector3(1, 0, 0), -rotation_speed)
+			rotate_object_local(Vector3(1, 0, 0), -rotation_speed/2)
 		if Input.is_action_pressed("rotate_backwards"):
-			rotate_object_local(Vector3(1, 0, 0), rotation_speed)
+			rotate_object_local(Vector3(1, 0, 0), rotation_speed/2)
+		#velocity = velocity.length() * -transform.basis.z
 	if Input.is_action_pressed("fly"):
-		velocity += transform.basis.y * move_speed
+		velocity += transform.basis.y * 12
 	if Input.is_action_pressed("movement_jump"):
 		velocity = lerp(velocity, Vector3(0, 0, 0), delta*2)
 	floor_stop_on_slope = true

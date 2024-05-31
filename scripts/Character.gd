@@ -124,7 +124,7 @@ func apply_gravity(delta):
 		
 	global_transform = global_transform.interpolate_with(aligned_rotation, 5 * delta)
 			
-	velocity = lerp(velocity, Vector3(0, 0, 0), delta * 10)
+	velocity = lerp(velocity, Vector3(0, 0, 0), delta * 5)
 	velocity += gravity_direction * gravitational_velocity
 
 func set_gravity():

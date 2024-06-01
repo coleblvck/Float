@@ -117,7 +117,7 @@ func apply_gravity(delta):
 	for i in collision_count:
 		var collision = get_slide_collision(i)
 		if collision.get_collider() is Location:
-				gravitational_velocity = 0
+				gravitational_velocity = gravity_force/2
 		else:
 			gravitational_velocity += gravity_force
 	align_rotation_with_gravity(global_transform, gravity_direction)

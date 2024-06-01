@@ -11,27 +11,23 @@
 [ext_resource type="ArrayMesh" uid="uid://48cqtbecc8we" path="res://assets/models/vehicles/springtail/ExhaustBottomLeft.res" id="8_kt0qs"]
 [ext_resource type="ArrayMesh" uid="uid://de5mfu5mnni3n" path="res://assets/models/vehicles/springtail/ExhaustBottomRight.res" id="9_tcnm1"]
 [ext_resource type="PackedScene" uid="uid://ciojgibbs27wt" path="res://scenes/utilities/PlayerCamera.tscn" id="10_edsil"]
+[ext_resource type="Script" path="res://scenes/vehicles/Door.gd" id="11_8p6wn"]
 [ext_resource type="Script" path="res://scenes/vehicles/springtail/CameraPivot.gd" id="11_erop3"]
-[ext_resource type="Animation" uid="uid://45hapv22etun" path="res://assets/models/vehicles/springtail/LeftDoorOpen.res" id="12_nbt8v"]
+[ext_resource type="AnimationLibrary" uid="uid://c1jdfmjfs58hx" path="res://assets/models/vehicles/springtail/Springtail.res" id="13_ijoak"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_u6gvf"]
 points = PackedVector3Array(-0.596834, 0.651987, -0.504421, 0.758452, 0.926537, 0.666157, 0.413088, 0.817586, -1.52922, -0.359759, 1.38162, -0.270737, -0.141669, 0.685994, 1.39531, 0.321917, 0.562926, -0.226965, -0.254993, 1.12579, 1.34922, 0.364793, 1.38287, -0.225852, -0.306359, 1.07436, -1.47769, -0.757682, 0.926235, 0.669383, 0.155936, 1.38276, 0.937644, 0.577516, 0.781542, 1.15753, 0.758104, 0.784818, -0.656931, -0.758733, 0.926136, -0.6604, -0.281392, 0.737607, -1.46004, -0.511985, 1.33133, 0.474866, 0.464454, 1.07436, -1.32343, -0.456094, 0.608025, 0.550928, 0.258829, 1.12579, 1.34922, 0.51582, 1.33133, 0.474866, 0.229346, 1.38404, -0.590307, 0.416128, 0.606172, 0.646263, 0.139988, 0.605778, -1.01147, 0.8245, 0.766154, 0.680652, 0.759256, 0.926461, -0.657795, -0.575185, 0.780975, 1.16081, -0.759219, 0.735782, 0.385388, -0.226838, 0.562585, -0.501791, -0.0903002, 0.558681, 0.602385, -0.563351, 1.07436, -1.16949, -0.409252, 0.817586, -1.52922, -0.0895652, 1.43254, 0.230329)
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_tfw0h"]
-points = PackedVector3Array(0.762989, 0.743616, -0.589196, 0.765324, 0.76025, 0.665579, 0.344617, 1.309, 0.407436, 0.818431, 1.01575, -0.562597, 0.344617, 1.309, -0.314364, 0.615398, 0.744929, 0.633051, 0.841014, 0.970595, 0.587957, 0.615398, 0.744929, -0.63031, 0.570286, 1.33155, 0.407436, 0.491106, 1.34988, -0.309252, 0.864047, 0.790528, -0.143567, 0.700841, 1.01754, 0.663686, 0.722297, 0.99607, -0.661705, 0.808207, 0.80309, -0.662809, 0.362756, 1.35479, 0.338157, 0.818431, 1.03824, -0.427171, 0.824098, 0.746849, 0.293427, 0.637875, 0.722317, 0.475149, 0.434895, 1.17359, -0.472408, 0.818431, 1.03824, 0.429913, 0.862117, 0.895316, -0.348008, 0.863977, 0.832058, 0.353372, 0.637875, 0.880277, -0.675546, 0.637875, 0.790024, 0.678146, 0.750789, 1.06078, -0.63031, 0.795901, 1.01575, 0.65567, 0.530009, 1.25235, 0.513838, 0.434895, 1.15097, 0.520244, 0.637875, 0.722317, -0.472408, 0.558677, 1.30472, -0.263193, 0.361562, 1.35623, -0.252337, 0.44656, 1.31332, -0.378457)
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_swcta"]
 size = Vector3(3, 1, 4)
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_2vvsw"]
-_data = {
-"LeftDoorOpen": ExtResource("12_nbt8v")
-}
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_r5k8w"]
 points = PackedVector3Array(-0.79946, 1.01575, 0.633051, -0.745985, 0.742424, -0.591496, -0.430176, 1.3538, -0.313301, -0.618975, 0.744929, 0.633051, -0.348274, 1.309, 0.407436, -0.821988, 1.01575, -0.540262, -0.618975, 0.744929, -0.63031, -0.57392, 1.33155, 0.384818, -0.84706, 0.769587, 0.291538, -0.370854, 1.26384, -0.382077, -0.725678, 0.996189, -0.660234, -0.596501, 1.28639, -0.404695, -0.868533, 0.851963, -0.310496, -0.844568, 0.993143, 0.475149, -0.791497, 0.801475, 0.691516, -0.704546, 1.01749, 0.664741, -0.810697, 0.804458, -0.659123, -0.365943, 1.35535, 0.338777, -0.78715, 0.744638, 0.547935, -0.57392, 1.309, 0.475149, -0.79946, 1.06078, -0.427171, -0.348274, 1.33155, -0.336982, -0.827675, 0.746821, -0.228081, -0.461123, 1.10582, 0.542862, -0.868534, 0.851963, 0.313228, -0.506231, 1.06078, -0.540262, -0.821988, 1.03824, 0.407436, -0.844568, 0.993143, -0.472408, -0.79946, 1.01575, -0.63031, -0.72653, 0.931204, -0.687216, -0.495346, 1.34843, -0.307753, -0.828182, 0.808874, 0.608133)
 
 [sub_resource type="Skin" id="Skin_ipwak"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_tfw0h"]
+points = PackedVector3Array(0.762989, 0.743616, -0.589196, 0.765324, 0.76025, 0.665579, 0.344617, 1.309, 0.407436, 0.818431, 1.01575, -0.562597, 0.344617, 1.309, -0.314364, 0.615398, 0.744929, 0.633051, 0.841014, 0.970595, 0.587957, 0.615398, 0.744929, -0.63031, 0.570286, 1.33155, 0.407436, 0.491106, 1.34988, -0.309252, 0.864047, 0.790528, -0.143567, 0.700841, 1.01754, 0.663686, 0.722297, 0.99607, -0.661705, 0.808207, 0.80309, -0.662809, 0.362756, 1.35479, 0.338157, 0.818431, 1.03824, -0.427171, 0.824098, 0.746849, 0.293427, 0.637875, 0.722317, 0.475149, 0.434895, 1.17359, -0.472408, 0.818431, 1.03824, 0.429913, 0.862117, 0.895316, -0.348008, 0.863977, 0.832058, 0.353372, 0.637875, 0.880277, -0.675546, 0.637875, 0.790024, 0.678146, 0.750789, 1.06078, -0.63031, 0.795901, 1.01575, 0.65567, 0.530009, 1.25235, 0.513838, 0.434895, 1.15097, 0.520244, 0.637875, 0.722317, -0.472408, 0.558677, 1.30472, -0.263193, 0.361562, 1.35623, -0.252337, 0.44656, 1.31332, -0.378457)
 
 [node name="Springtail" type="CharacterBody3D"]
 script = ExtResource("1_yalyn")
@@ -47,12 +43,6 @@ mesh = ExtResource("2_dsger")
 
 [node name="RearGlass" type="MeshInstance3D" parent="."]
 mesh = ExtResource("3_i3ek7")
-
-[node name="RightDoor" type="MeshInstance3D" parent="."]
-mesh = ExtResource("5_r1ho4")
-
-[node name="RightDoorCol" type="CollisionShape3D" parent="."]
-shape = SubResource("ConvexPolygonShape3D_tfw0h")
 
 [node name="ExhaustTopLeft" type="MeshInstance3D" parent="."]
 mesh = ExtResource("6_pymvq")
@@ -97,13 +87,8 @@ script = ExtResource("11_erop3")
 [node name="PlayerCamera" parent="CameraPivot" instance=ExtResource("10_edsil")]
 transform = Transform3D(1, 0, 0, 0, 0.876281, 0.4818, 0, -0.4818, 0.876281, 0, 3.66855, 4.756)
 
-[node name="LeftDoorOpen" type="AnimationPlayer" parent="."]
-root_node = NodePath("../LeftDoor")
-libraries = {
-"": SubResource("AnimationLibrary_2vvsw")
-}
-
 [node name="LeftDoor" type="AnimatableBody3D" parent="."]
+script = ExtResource("11_8p6wn")
 
 [node name="LeftDoorCol" type="CollisionShape3D" parent="LeftDoor"]
 shape = SubResource("ConvexPolygonShape3D_r5k8w")
@@ -112,3 +97,24 @@ shape = SubResource("ConvexPolygonShape3D_r5k8w")
 mesh = ExtResource("4_d70e0")
 skin = SubResource("Skin_ipwak")
 skeleton = NodePath("../..")
+
+[node name="DoorOpen" type="AnimationPlayer" parent="LeftDoor"]
+libraries = {
+"Springtail": ExtResource("13_ijoak")
+}
+
+[node name="RightDoor" type="AnimatableBody3D" parent="."]
+script = ExtResource("11_8p6wn")
+door_type = 1
+
+[node name="RightDoorCol" type="CollisionShape3D" parent="RightDoor"]
+shape = SubResource("ConvexPolygonShape3D_tfw0h")
+
+[node name="RightDoor" type="MeshInstance3D" parent="RightDoor"]
+mesh = ExtResource("5_r1ho4")
+skeleton = NodePath("../..")
+
+[node name="DoorOpen" type="AnimationPlayer" parent="RightDoor"]
+libraries = {
+"Springtail": ExtResource("13_ijoak")
+}

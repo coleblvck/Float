@@ -16,7 +16,7 @@ func _physics_process(delta):
 	current_velocity = parent_basis * current_velocity
 	var lerp_to :Vector3 = -parent.transform.basis.z
 	#Rotate camera to back
-	if (current_velocity * parent.global_transform.basis).z > 1:
+	if (current_velocity * parent.global_transform.basis).z > 3:
 		lerp_to = -lerp_to
 	if (current_velocity * parent.global_transform.basis).z != 0:
 		pass

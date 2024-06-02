@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://bfthpbsfref84"]
+[gd_scene load_steps=10 format=3 uid="uid://bfthpbsfref84"]
 
 [ext_resource type="PackedScene" uid="uid://ciojgibbs27wt" path="res://scenes/utilities/PlayerCamera.tscn" id="1_5pgc1"]
 [ext_resource type="ArrayMesh" uid="uid://chvvyix3it4xt" path="res://assets/models/characters/Ball_Body.res" id="1_aplmq"]
 [ext_resource type="Script" path="res://characters/BallCharacter.gd" id="1_ewvab"]
 [ext_resource type="ArrayMesh" uid="uid://d247kequpdblp" path="res://assets/models/characters/Ball_Fur.res" id="2_boe28"]
 [ext_resource type="ArrayMesh" uid="uid://da0g8hrnpe55d" path="res://assets/models/characters/Ball_Eyes.res" id="4_6xqeg"]
+[ext_resource type="Script" path="res://scenes/vehicles/springtail/CameraPivot.gd" id="5_f2wnr"]
 
 [sub_resource type="MultiMesh" id="MultiMesh_hja5b"]
 transform_format = 1
@@ -27,7 +28,7 @@ mesh = ExtResource("1_aplmq")
 [node name="CharacterHair" type="MultiMeshInstance3D" parent="CharacterBody"]
 multimesh = SubResource("MultiMesh_hja5b")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CharacterBodyCollision" type="CollisionShape3D" parent="."]
 shape = SubResource("ConvexPolygonShape3D_2l11n")
 
 [node name="Space" type="Area3D" parent="."]
@@ -35,8 +36,11 @@ shape = SubResource("ConvexPolygonShape3D_2l11n")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Space"]
 shape = SubResource("SphereShape3D_bdd1i")
 
-[node name="PlayerCamera" parent="." instance=ExtResource("1_5pgc1")]
-transform = Transform3D(1, 0, 0, 0, 0.951229, 0.308486, 0, -0.308486, 0.951229, 0, 0.640852, 0.674529)
-
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = ExtResource("4_6xqeg")
+
+[node name="CameraPivot" type="Node3D" parent="."]
+script = ExtResource("5_f2wnr")
+
+[node name="PlayerCamera" parent="CameraPivot" instance=ExtResource("1_5pgc1")]
+transform = Transform3D(1, 0, 0, 0, 0.951229, 0.308486, 0, -0.308486, 0.951229, 0, 0.640852, 0.674529)

@@ -1,19 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://b7ohwfubl0i84"]
+[gd_scene load_steps=3 format=3 uid="uid://b7ohwfubl0i84"]
 
 [ext_resource type="PackedScene" uid="uid://bfm43i5l8yajp" path="res://scenes/Sun.tscn" id="1_cvhnn"]
 
 [sub_resource type="Environment" id="Environment_6qkhj"]
 background_mode = 1
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e00eb"]
-bg_color = Color(0.38292, 0.382911, 0.396702, 0.305882)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
-[sub_resource type="Theme" id="Theme_vcetd"]
-Panel/styles/panel = SubResource("StyleBoxFlat_e00eb")
+ambient_light_source = 1
+reflected_light_source = 1
+volumetric_fog_density = 0.0
 
 [node name="Universe" type="Node3D"]
 
@@ -21,47 +14,3 @@ Panel/styles/panel = SubResource("StyleBoxFlat_e00eb")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_6qkhj")
-
-[node name="HUD" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -648.0
-offset_right = 1150.0
-grow_vertical = 0
-theme = SubResource("Theme_vcetd")
-
-[node name="HUDPanel" type="Panel" parent="HUD"]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -183.0
-offset_right = 273.0
-grow_vertical = 0
-
-[node name="DoorsGrid" type="GridContainer" parent="HUD/HUDPanel"]
-custom_minimum_size = Vector2(85, 85)
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -79.0
-offset_top = -76.0
-grow_horizontal = 0
-grow_vertical = 0
-theme_override_constants/h_separation = 5
-theme_override_constants/v_separation = 5
-columns = 2
-
-[node name="RichTextLabel" type="RichTextLabel" parent="HUD/HUDPanel"]
-layout_mode = 0
-offset_left = 179.0
-offset_top = 49.0
-offset_right = 274.0
-offset_bottom = 81.0
-text = "Doors"
-tab_size = 24

@@ -3,7 +3,7 @@ class_name CameraFollowPivot
 
 var direction = Vector3.FORWARD
 @onready var parent :Character = get_parent()
-@export_range(0.5, 10, 0.1) var follow_smooth_speed :float = 0.5
+@export_range(0.5, 10, 0.1) var follow_smooth_speed :float = 5
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -15,6 +15,7 @@ func _physics_process(delta):
 	var parent_basis = (Vector3(1, 0, 1)).angle_to(parent.global_transform.basis.y)
 	current_velocity = parent_basis * current_velocity
 	var lerp_to :Vector3 = -parent.transform.basis.z
+	#Rotate camera to back
 	if (current_velocity * parent.global_transform.basis).z > 1:
 		lerp_to = -lerp_to
 	if (current_velocity * parent.global_transform.basis).z != 0:

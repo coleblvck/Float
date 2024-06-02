@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://djeyf7mcfekia"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_3xfj5"]
+radius = 100.0
+height = 200.0
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kvna8"]
+
+[sub_resource type="Sky" id="Sky_e32ly"]
+sky_material = SubResource("ProceduralSkyMaterial_kvna8")
+
+[sub_resource type="Environment" id="Environment_wnem2"]
+background_mode = 2
+sky = SubResource("Sky_e32ly")
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0
+volumetric_fog_ambient_inject = 13.3
+
+[node name="Planet" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_3xfj5")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_wnem2")

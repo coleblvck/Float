@@ -7,9 +7,13 @@ var power :bool = false
 var acceleration :float = 40
 var vertical_speed :float = 0.5
 var pitch_speed :float = 0.02
+var move_speed :float = 2
+var rotation_speed :float = 0.01
 var doors :Array[VehicleDoor]
+var occupants :Array[Player]
+var driver :Player
 @onready var children :Array = get_children()
-@onready var vehicle_hud :Control = universe.get_node("HUD")
+@onready var vehicle_hud :Control = preload("res://scenes/utilities/VehicleHUD.tscn").instantiate()
 
 func _ready():
 	init_character()
@@ -20,7 +24,8 @@ func _ready():
 func _physics_process(delta):
 	if !in_space:
 		apply_gravity(delta)
-	control_vehicle(delta)
+	if driver == null:
+		move_and_slide()
 
 func switch_headlights():
 	for headlight in headlights:
@@ -33,6 +38,8 @@ func switch_headlights():
 func control_vehicle(delta):
 	move(delta)
 	toggles()
+	if Input.is_action_pressed("Print Location"):
+		print(position)
 	
 func move(delta):
 	if power:
@@ -41,29 +48,34 @@ func move(delta):
 			velocity += -gravity_direction * gravity_force
 		if Input.is_action_pressed("movement_forward"):
 			velocity = lerp(velocity, (velocity + (-transform.basis.z * move_speed)), delta * acceleration)
+			if in_space:
+				velocity = velocity.length() * -transform.basis.z
 		if Input.is_action_pressed("movement_backward"):
 			velocity += (transform.basis.z * move_speed)
-		if (velocity * global_transform.basis).z > 0.1:
-			if Input.is_action_pressed("movement_left"):
-				rotate_object_local(Vector3(0, 1, 0), -rotation_speed)
-			if Input.is_action_pressed("movement_right"):
-				rotate_object_local(Vector3(0, 1, 0), rotation_speed)
-		else:
-			if Input.is_action_pressed("movement_left"):
-				rotate_object_local(Vector3(0, 1, 0), rotation_speed)
-			if Input.is_action_pressed("movement_right"):
-				rotate_object_local(Vector3(0, 1, 0), -rotation_speed)
+			
+		if Input.is_action_pressed("movement_left"):
+			if (velocity * transform.basis).z > 1.0:
+				rotate_object_local(Vector3(0, 1, 0), lerp(0.0, -rotation_speed, delta * 50))
+			else:
+				rotate_object_local(Vector3(0, 1, 0), lerp(0.0, rotation_speed, delta * 50))
+		if Input.is_action_pressed("movement_right"):
+			if (velocity * transform.basis).z > 1.0:
+				rotate_object_local(Vector3(0, 1, 0), lerp(0.0, rotation_speed, delta * 50))
+			else:
+				rotate_object_local(Vector3(0, 1, 0), lerp(0.0, -rotation_speed, delta * 50))
+				
 		if Input.is_action_pressed("rotate_forwards"):
 			rotate_object_local(Vector3(1, 0, 0), lerp(0.0, -pitch_speed, delta * 50))
 		if Input.is_action_pressed("rotate_backwards"):
 			rotate_object_local(Vector3(1, 0, 0), lerp(0.0, pitch_speed, delta * 50))
-		#velocity = velocity.length() * -transform.basis.z
 		if Input.is_action_pressed("fly"):
 			velocity += transform.basis.y * vertical_speed
 		if Input.is_action_pressed("movement_jump"):
 			if in_space:
 				velocity = lerp(velocity, Vector3(0, 0, 0), delta*5)
 			else:
+				if (velocity * global_transform.basis).z != 0.0:
+					velocity = lerp(velocity, Vector3(0, 0, 0), delta*5)
 				velocity = lerp(velocity, (gravity_direction * gravity_force), delta*5)
 	else:
 		vehicle_hud.hide()
@@ -97,3 +109,24 @@ func setup_hud():
 	var dash_doors :GridContainer = vehicle_hud.get_node("HUDPanel/DoorsGrid")
 	for door in doors:
 		dash_doors.add_child(door.panel_indicator)
+
+func enter(player :Player, is_driver: bool):
+	if !occupants.has(player):
+		occupants.append(player)
+		if is_driver:
+			driver = player
+		player.hide()
+		player.reparent(self)
+		player.camera.current = false
+		camera.current = true
+	pass
+
+func exit(player :Player):
+	if occupants.has(player):
+		occupants.remove_at(0)
+		if driver == player:
+			driver = null
+		player.reparent(universe)
+		player.show()
+		player.camera.current = true
+		camera.current = false

@@ -1,6 +1,6 @@
 extends Control
 var universe = preload("res://scenes/Universe.tscn").instantiate()
-var player :CharacterBody3D = preload("res://scenes/vehicles/springtail/Springtail.tscn").instantiate()
+var player :CharacterBody3D = preload("res://characters/BallCharacter.tscn").instantiate()
 var player_origin: Node3D = Node3D.new()
 var springtail :CharacterBody3D = preload("res://scenes/vehicles/springtail/Springtail.tscn").instantiate()
 @onready var tree :Tree = $Tree
@@ -39,6 +39,7 @@ func add_bodies_to_tree():
 	
 func load_objects():
 	load_player(player)
+	load_vehicle(springtail)
 	#springtail.position = Vector3(22.41635, -43.78969, 2895.787)
 	#universe.add_child(springtail)
 	
@@ -48,6 +49,12 @@ func load_objects():
 		universe.add_child(planet)
 		
 func load_player(player_body :CharacterBody3D):
-	player_body.position = Vector3(-122.8, 29.967, 0)
+	player_body.position = Vector3(32.19547, -65.00717, 2886.367)
 	player_body.universe = universe
 	universe.add_child(player_body)
+
+
+func load_vehicle(vehicle :CharacterBody3D):
+	vehicle.position = Vector3(20.19547, -70.00717, 2886.367)
+	vehicle.universe = universe
+	universe.add_child(vehicle)

@@ -16,6 +16,7 @@ script = ExtResource("1_qaacr")
 mesh = ExtResource("2_6pu15")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+visible = false
 shape = SubResource("ConcavePolygonShape3D_p42bt")
 
 [node name="Atmosphere" type="Area3D" parent="."]

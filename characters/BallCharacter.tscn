@@ -43,4 +43,4 @@ mesh = ExtResource("4_6xqeg")
 script = ExtResource("5_f2wnr")
 
 [node name="PlayerCamera" parent="CameraPivot" instance=ExtResource("1_5pgc1")]
-transform = Transform3D(1, 0, 0, 0, 0.951229, 0.308486, 0, -0.308486, 0.951229, 0, 0.640852, 0.674529)
+transform = Transform3D(1, 0, 0, 0, 0.951229, 0.308486, 0, -0.308486, 0.951229, 0, 1.23789, 1.37194)

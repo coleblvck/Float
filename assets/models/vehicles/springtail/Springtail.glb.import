@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/Springtail.glb-c4dcbe889a4522388d6972cd99552c
 
 [params]
 
-nodes/root_type=""
+nodes/root_type="Node3D"
 nodes/root_name=""
 nodes/apply_root_scale=true
 nodes/root_scale=1.0
@@ -32,7 +32,7 @@ import_script/path=""
 _subresources={
 "animations": {
 "LeftDoorOpen": {
-"save_to_file/enabled": true,
+"save_to_file/enabled": false,
 "save_to_file/keep_custom_tracks": "",
 "save_to_file/path": "res://assets/models/vehicles/springtail/LeftDoorOpen.res",
 "settings/loop_mode": 0,
@@ -1831,7 +1831,7 @@ _subresources={
 "slices/amount": 0
 },
 "RightDoorOpen": {
-"save_to_file/enabled": true,
+"save_to_file/enabled": false,
 "save_to_file/keep_custom_tracks": "",
 "save_to_file/path": "res://assets/models/vehicles/springtail/RightDoorOpen.res",
 "settings/loop_mode": 0,
@@ -3637,7 +3637,7 @@ _subresources={
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 60.0,
 "lods/normal_split_angle": 25.0,
-"save_to_file/enabled": true,
+"save_to_file/enabled": false,
 "save_to_file/make_streamable": "",
 "save_to_file/path": "res://assets/models/vehicles/springtail/ExhaustBottomLeft.res"
 },
@@ -3647,7 +3647,7 @@ _subresources={
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 60.0,
 "lods/normal_split_angle": 25.0,
-"save_to_file/enabled": true,
+"save_to_file/enabled": false,
 "save_to_file/make_streamable": "",
 "save_to_file/path": "res://assets/models/vehicles/springtail/ExhaustBottomRight.res"
 },
@@ -3657,7 +3657,7 @@ _subresources={
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 60.0,
 "lods/normal_split_angle": 25.0,
-"save_to_file/enabled": true,
+"save_to_file/enabled": false,
 "save_to_file/make_streamable": "",
 "save_to_file/path": "res://assets/models/vehicles/springtail/ExhaustTopLeft.res"
 },
@@ -3667,7 +3667,7 @@ _subresources={
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 60.0,
 "lods/normal_split_angle": 25.0,
-"save_to_file/enabled": true,
+"save_to_file/enabled": false,
 "save_to_file/make_streamable": "",
 "save_to_file/path": "res://assets/models/vehicles/springtail/ExhaustTopRight.res"
 },
@@ -3677,7 +3677,7 @@ _subresources={
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 60.0,
 "lods/normal_split_angle": 25.0,
-"save_to_file/enabled": true,
+"save_to_file/enabled": false,
 "save_to_file/make_streamable": "",
 "save_to_file/path": "res://assets/models/vehicles/springtail/LeftDoor.res"
 },
@@ -3687,7 +3687,7 @@ _subresources={
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 60.0,
 "lods/normal_split_angle": 25.0,
-"save_to_file/enabled": true,
+"save_to_file/enabled": false,
 "save_to_file/make_streamable": "",
 "save_to_file/path": "res://assets/models/vehicles/springtail/RearGlass.res"
 },
@@ -3697,7 +3697,7 @@ _subresources={
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 60.0,
 "lods/normal_split_angle": 25.0,
-"save_to_file/enabled": true,
+"save_to_file/enabled": false,
 "save_to_file/make_streamable": "",
 "save_to_file/path": "res://assets/models/vehicles/springtail/RightDoor.res"
 },
@@ -3707,7 +3707,7 @@ _subresources={
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 60.0,
 "lods/normal_split_angle": 25.0,
-"save_to_file/enabled": true,
+"save_to_file/enabled": false,
 "save_to_file/make_streamable": "",
 "save_to_file/path": "res://assets/models/vehicles/springtail/Vehicle.res"
 },
@@ -3717,7 +3717,7 @@ _subresources={
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 60.0,
 "lods/normal_split_angle": 25.0,
-"save_to_file/enabled": true,
+"save_to_file/enabled": false,
 "save_to_file/make_streamable": "",
 "save_to_file/path": "res://assets/models/vehicles/springtail/Windshield.res"
 }

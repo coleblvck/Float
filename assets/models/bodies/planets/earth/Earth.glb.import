@@ -37,19 +37,9 @@ _subresources={
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 60.0,
 "lods/normal_split_angle": 25.0,
-"save_to_file/enabled": true,
+"save_to_file/enabled": false,
 "save_to_file/make_streamable": "",
 "save_to_file/path": "res://assets/models/bodies/planets/earth/Earth_Earth.res"
-},
-"Earth_House": {
-"generate/lightmap_uv": 0,
-"generate/lods": 0,
-"generate/shadow_meshes": 0,
-"lods/normal_merge_angle": 60.0,
-"lods/normal_split_angle": 25.0,
-"save_to_file/enabled": true,
-"save_to_file/make_streamable": "",
-"save_to_file/path": "res://assets/models/bodies/planets/earth/House1.res"
 },
 "Earth_Water": {
 "generate/lightmap_uv": 0,
@@ -57,7 +47,7 @@ _subresources={
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 60.0,
 "lods/normal_split_angle": 25.0,
-"save_to_file/enabled": true,
+"save_to_file/enabled": false,
 "save_to_file/make_streamable": "",
 "save_to_file/path": "res://assets/models/bodies/planets/earth/Earth_Water.res"
 }

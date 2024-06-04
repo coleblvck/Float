@@ -22,6 +22,8 @@ func _physics_process(delta):
 				vehicle.control_vehicle(delta)
 		else:
 			control_player(delta)
+		if Input.is_action_just_pressed("Print Location"):
+			print([position, transform])
 	
 func control_player(delta):
 	if !in_space:

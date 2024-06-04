@@ -2,7 +2,7 @@ extends Control
 var universe = preload("res://scenes/Universe.tscn").instantiate()
 var player :CharacterBody3D = preload("res://characters/BallCharacter.tscn").instantiate()
 var player_origin: Node3D = Node3D.new()
-var springtail :CharacterBody3D = preload("res://scenes/vehicles/springtail/Springtail.tscn").instantiate()
+var springtail :CharacterBody3D = preload("res://NewVehicle.tscn").instantiate()
 @onready var tree :Tree = $Tree
 @onready var play_button = $PlayButton
 
@@ -42,7 +42,8 @@ func load_objects():
 	load_vehicle(springtail)
 	#springtail.position = Vector3(22.41635, -43.78969, 2895.787)
 	#universe.add_child(springtail)
-	
+	var bloom :Planet = load("res://NewPlanet.tscn").instantiate()
+	universe.add_child(bloom)
 	#Load Planets and Moons
 	for planet_name in planets:
 		var planet :Planet = load("res://scenes/locations/planets/%s.tscn" %planet_name).instantiate()

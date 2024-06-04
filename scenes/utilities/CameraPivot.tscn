@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://wbumtoh2ef3m"]
 
-[ext_resource type="Script" path="res://scenes/vehicles/springtail/CameraPivot.gd" id="1_f12f0"]
+[ext_resource type="Script" path="res://scenes/utilities/CameraPivot.gd" id="1_f12f0"]
 [ext_resource type="PackedScene" uid="uid://ciojgibbs27wt" path="res://scenes/utilities/PlayerCamera.tscn" id="2_ddtiy"]
 
 [node name="CameraPivot" type="Node3D"]

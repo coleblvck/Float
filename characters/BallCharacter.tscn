@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://characters/BallCharacter.gd" id="1_ewvab"]
 [ext_resource type="ArrayMesh" uid="uid://d247kequpdblp" path="res://assets/models/characters/Ball_Fur.res" id="2_boe28"]
 [ext_resource type="ArrayMesh" uid="uid://da0g8hrnpe55d" path="res://assets/models/characters/Ball_Eyes.res" id="4_6xqeg"]
-[ext_resource type="Script" path="res://scenes/vehicles/springtail/CameraPivot.gd" id="5_f2wnr"]
+[ext_resource type="Script" path="res://scenes/utilities/CameraPivot.gd" id="5_igaap"]
 
 [sub_resource type="MultiMesh" id="MultiMesh_hja5b"]
 transform_format = 1
@@ -40,7 +40,7 @@ shape = SubResource("SphereShape3D_bdd1i")
 mesh = ExtResource("4_6xqeg")
 
 [node name="CameraPivot" type="Node3D" parent="."]
-script = ExtResource("5_f2wnr")
+script = ExtResource("5_igaap")
 
 [node name="PlayerCamera" parent="CameraPivot" instance=ExtResource("1_5pgc1")]
 transform = Transform3D(1, 0, 0, 0, 0.951229, 0.308486, 0, -0.308486, 0.951229, 0, 1.23789, 1.37194)

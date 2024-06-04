@@ -1,9 +1,9 @@
 extends Location
 class_name Planet
 
-var moons :Array[String]
+@export var moons :Array[PackedScene]
 
 func spawn_moons():
-	for moon_name in moons:
-		var moon = load("res://scenes/locations/moons/%s.tscn" %moon_name).instantiate()
+	for moon_scene in moons:
+		var moon = moon_scene.instantiate()
 		add_child(moon)

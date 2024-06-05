@@ -4,12 +4,14 @@ class_name Vehicle
 var headlights :Array
 var headlights_on :bool = false
 var power :bool = false
-var drive_speed :float = 2
-var acceleration :float = 40
+var drive_speed :float = 0.0
+var acceleration :float = 20
+var top_speed :float = 2.5
 var vertical_speed :float = 0.5
-var pitch_speed :float = 0.02
+var pitch_speed :float = 0.01
 var rotation_speed :float = 0.01
 var turn_factor :float = 100
+var minimum_hover :float = 5
 var occupants :Array[Player]
 var driver :Player
 var vehicle_doors :Array[VehicleDoor]
@@ -52,43 +54,58 @@ func control_vehicle(delta):
 	
 func move(delta):
 	if power:
+		switch_gears()
 		if !in_space:
-			velocity += -gravity_direction * gravity_force
+			if !is_on_floor():
+				velocity += -gravity_direction * gravitational_velocity
+			else:
+				velocity += -gravity_direction * (gravitational_velocity + minimum_hover)
 		if Input.is_action_pressed("movement_forward"):
-			velocity = lerp(velocity, (velocity + (-transform.basis.z * drive_speed)), delta * acceleration)
+			velocity = lerp(velocity, (velocity + (-global_transform.basis.z * drive_speed)), delta * acceleration)
 			if in_space:
-				velocity = velocity.length() * -transform.basis.z
+				velocity = velocity.length() * -global_transform.basis.z
 		if Input.is_action_pressed("movement_backward"):
-			velocity += (transform.basis.z * drive_speed/2)
+			if (velocity * global_transform.basis).z != 0.0:
+				velocity = lerp(velocity, Vector3(0, 0, 0), delta*5)
 			
 		if Input.is_action_pressed("movement_left"):
-			if (velocity * transform.basis).z > 1.0:
-				rotate_object_local(Vector3(0, 1, 0), lerp(0.0, -rotation_speed, delta * turn_factor))
-			else:
+			if drive_speed != -0.5:
 				rotate_object_local(Vector3(0, 1, 0), lerp(0.0, rotation_speed, delta * turn_factor))
+			elif (velocity * global_transform.basis).z > 0.0:
+				rotate_object_local(Vector3(0, 1, 0), lerp(0.0, -rotation_speed, delta * turn_factor))
 		if Input.is_action_pressed("movement_right"):
-			if (velocity * transform.basis).z > 1.0:
-				rotate_object_local(Vector3(0, 1, 0), lerp(0.0, rotation_speed, delta * turn_factor))
-			else:
+			if drive_speed != -0.5:
 				rotate_object_local(Vector3(0, 1, 0), lerp(0.0, -rotation_speed, delta * turn_factor))
+			elif (velocity * global_transform.basis).z > 0.0:
+				rotate_object_local(Vector3(0, 1, 0), lerp(0.0, rotation_speed, delta * turn_factor))
 				
 		if Input.is_action_pressed("rotate_forwards"):
 			rotate_object_local(Vector3(1, 0, 0), lerp(0.0, -pitch_speed, delta * turn_factor))
 		if Input.is_action_pressed("rotate_backwards"):
 			rotate_object_local(Vector3(1, 0, 0), lerp(0.0, pitch_speed, delta * turn_factor))
 		if Input.is_action_pressed("fly"):
-			velocity += transform.basis.y * vertical_speed
+			velocity += global_transform.basis.y * vertical_speed
 		if Input.is_action_pressed("movement_jump"):
 			if in_space:
 				velocity = lerp(velocity, Vector3(0, 0, 0), delta*5)
 			else:
-				if (velocity * global_transform.basis).z != 0.0:
-					velocity = lerp(velocity, Vector3(0, 0, 0), delta*5)
 				velocity = lerp(velocity, (gravity_direction * gravity_force), delta*5)
 
 	floor_stop_on_slope = true
 	move_and_slide()
-		
+
+func switch_gears():
+	if Input.is_action_just_pressed("Gear Up"):
+		if drive_speed < top_speed:
+			drive_speed += 0.5
+	elif Input.is_action_just_released("Gear Down"):
+		if drive_speed > 0.0:
+			drive_speed -= 0.5
+	elif Input.is_action_just_pressed("Neutral Gear"):
+		drive_speed = 0.0
+	elif Input.is_action_just_pressed("Reverse Gear"):
+		drive_speed = -0.5
+
 func toggles():
 	if Input.is_action_just_pressed("toggle_lights"):
 		switch_headlights()
@@ -145,3 +162,22 @@ func exit(player :Player):
 		player.show()
 		player.camera.current = true
 		camera.current = false
+
+
+func apply_gravity(delta):
+	set_gravity()
+	
+	var collision_count = get_slide_collision_count()
+	gravitational_velocity = gravity_force
+	for i in collision_count:
+		var collision = get_slide_collision(i)
+		if collision.get_collider() is Location:
+				gravitational_velocity = gravity_force/2
+		else:
+			gravitational_velocity += gravity_force
+	align_rotation_with_gravity(global_transform, gravity_direction)
+		
+	global_transform = global_transform.interpolate_with(aligned_rotation, 5 * delta)
+			
+	velocity = lerp(velocity, Vector3(0, 0, 0), delta * 2)
+	velocity += gravity_direction * gravitational_velocity

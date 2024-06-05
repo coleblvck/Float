@@ -12,12 +12,15 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	var current_velocity = parent.velocity
-	var parent_basis = (Vector3(1, 0, 1)).angle_to(parent.transform.basis.y)
-	current_velocity = parent_basis * current_velocity
-	var lerp_to :Vector3 = -parent.transform.basis.z
+	var parent_zero_y = (Vector3(1, 0, 1)).angle_to(parent.transform.basis.y)
+	current_velocity = parent_zero_y * current_velocity
+	var lerp_to :Vector3 = -parent.global_transform.basis.z
 	#Rotate camera to back
-	if (current_velocity * parent.transform.basis).z > 5:
-		lerp_to = -lerp_to
+	if Input.is_action_pressed("Look Back"):
+		lerp_to = parent.global_transform.basis.z
+	if parent is Vehicle:
+		if parent.drive_speed == -0.5:
+			lerp_to = parent.global_transform.basis.z
 	if (current_velocity * parent.transform.basis).z != 0:
 		pass
 	direction = lerp(direction, lerp_to, follow_smooth_speed * delta)

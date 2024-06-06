@@ -2,7 +2,7 @@ extends Node3D
 class_name CameraFollowPivot
 
 var direction = Vector3.FORWARD
-@onready var parent :Character = get_parent()
+@onready var parent :SolidBody3D = get_parent()
 @export_range(0.5, 10, 0.1) var follow_smooth_speed :float = 5
 # Called when the node enters the scene tree for the first time.
 func _ready():

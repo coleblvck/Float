@@ -1,4 +1,4 @@
-extends Character
+extends SolidBody3D
 class_name  Player
 
 var in_vehicle :bool
@@ -31,7 +31,7 @@ func control_player(delta):
 		if nearby_vehicle_door != null:
 			check_and_enter_vehicle()
 
-func move(delta):
+func move(_delta):
 	
 	#up_direction = -gravity_direction.normalized()
 	var movement_vector = Input.get_vector("Strafe Left", "Strafe Right","movement_backward", "movement_forward").normalized()

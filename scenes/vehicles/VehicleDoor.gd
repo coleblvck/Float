@@ -26,7 +26,7 @@ func _on_Area_body_exited(body):
 	if body is Player:
 		body.nearby_vehicle_door = null
 
-func _process(delta):
+func _process(_delta):
 	if is_open:
 		panel_indicator.color = Color.RED
 	else:
@@ -69,16 +69,16 @@ func begin_animation_interruption(entry: bool):
 		animation_player.animation_finished.connect(exit_animation_stop_interruptions)
 
 
-func animation_start_interruptions(ddd):
+func animation_start_interruptions(_name):
 	door_side_occupant.movement_freeze = true
 
 
-func entry_animation_stop_interruptions(ddd):
+func entry_animation_stop_interruptions(_name):
 	animation_player.animation_started.disconnect(animation_start_interruptions)
 	animation_player.animation_finished.disconnect(entry_animation_stop_interruptions)
 	post_entry_animation_action()
 
-func exit_animation_stop_interruptions(ddd):
+func exit_animation_stop_interruptions(_name):
 	animation_player.animation_started.disconnect(animation_start_interruptions)
 	animation_player.animation_finished.disconnect(exit_animation_stop_interruptions)
 	post_exit_animation_action()

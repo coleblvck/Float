@@ -4,25 +4,23 @@
 offsets = PackedFloat32Array(0.646341, 0.987805, 1)
 colors = PackedColorArray(0.657809, 0.191916, 0.129851, 1, 0, 0, 0, 1, 1, 1, 1, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_37ihw"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_pkqgd"]
 gradient = SubResource("Gradient_dk67k")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8he82"]
 angle_max = 360.0
 direction = Vector3(0, 1, 0)
 spread = 0.0
-initial_velocity_min = 1.0
-initial_velocity_max = 5.0
 angular_velocity_max = 40.0
 gravity = Vector3(0, 0, 0)
 linear_accel_min = 1.0
 linear_accel_max = 5.0
 scale_min = 4.0
 scale_max = 40.0
-color_initial_ramp = SubResource("GradientTexture1D_37ihw")
+color_initial_ramp = SubResource("GradientTexture1D_pkqgd")
 turbulence_noise_speed = Vector3(0, 1, 0)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8inn5"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7idrq"]
 transparency = 1
 blend_mode = 1
 shading_mode = 0
@@ -35,7 +33,7 @@ particles_anim_v_frames = 1
 particles_anim_loop = false
 
 [sub_resource type="QuadMesh" id="QuadMesh_8w318"]
-material = SubResource("StandardMaterial3D_8inn5")
+material = SubResource("StandardMaterial3D_7idrq")
 
 [node name="Node3D" type="Node3D"]
 

@@ -18,15 +18,17 @@ func setup_atmosphere_area():
 	body_atmosphere.body_exited.connect(_on_Area_body_exited)
 
 func _on_Area_body_entered(body):
-	if body is Character:
+	if body is SolidBody3D:
 		body.set_location(name)
 		body.in_space = false
 		body.gravity_force = surface_gravity
 		body.gravitational_velocity = surface_gravity
 		body.location_node = self
+		body.motion_mode = CharacterBody3D.MOTION_MODE_GROUNDED
 		
 
 func _on_Area_body_exited(body):
-	if body is Character:
+	if body is SolidBody3D:
 		body.set_location("universe")
 		body.in_space = true
+		body.motion_mode = CharacterBody3D.MOTION_MODE_FLOATING

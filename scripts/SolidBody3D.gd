@@ -1,5 +1,5 @@
 extends CharacterBody3D
-class_name Character
+class_name SolidBody3D
 
 #Player Variables
 var space_move_speed :float = 0.5
@@ -20,15 +20,15 @@ var universe :Node3D
 #@onready var ray :RayCast3D = $Ray
 
 
-func _on_Area_body_entered(body):
+func _on_Area_body_entered(_body):
 	pass
 
 
-func init_character():
+func init_solid_body_proximity():
 	proximity_space.body_entered.connect(_on_Area_body_entered)
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	#var overlapping_bodies = proximity_space.get_overlapping_bodies()
 	pass
 

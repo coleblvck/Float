@@ -1,10 +1,10 @@
-extends Character
+extends SolidBody3D
 class_name Vehicle
 
-var headlights :Array
+
 var headlights_on :bool = false
 var power :bool = false
-var drive_speed :float = 0.0
+var drive_speed :float = 0.5
 var acceleration :float = 20
 var top_speed :float = 2.5
 var vertical_speed :float = 0.5
@@ -16,18 +16,22 @@ var occupants :Array[Player]
 var driver :Player
 var vehicle_doors :Array[VehicleDoor]
 
+@export_group("Lights")
+@export	var headlights :Array[SpotLight3D]
+
 @export_group("Door Arrangement")
 @export var doors :Dictionary
+
+@export_group("Exhaust")
+@export var exhaust_flames :Array[ExhaustFlame]
 
 @export_group("Animation Setup")
 @export var animation_player :AnimationPlayer
 
-@onready var children :Array = get_children()
 @onready var vehicle_hud :Control = preload("res://scenes/utilities/VehicleHUD.tscn").instantiate()
 
 func _ready():
-	init_character()
-	headlights = $Headlights.get_children()
+	init_solid_body_proximity()
 	setup_doors()
 	setup_hud()
 	
@@ -44,8 +48,10 @@ func switch_headlights():
 	for headlight in headlights:
 		if headlights_on:
 			headlight.hide()
+			headlight.light_energy = 0
 		else:
 			headlight.show()
+			headlight.light_energy = 10
 	headlights_on = !headlights_on
 
 func control_vehicle(delta):
@@ -98,19 +104,42 @@ func switch_gears():
 	if Input.is_action_just_pressed("Gear Up"):
 		if drive_speed < top_speed:
 			drive_speed += 0.5
+			set_exhausts()
 	elif Input.is_action_just_released("Gear Down"):
 		if drive_speed > 0.0:
 			drive_speed -= 0.5
+			set_exhausts()
 	elif Input.is_action_just_pressed("Neutral Gear"):
 		drive_speed = 0.0
+		set_exhausts()
 	elif Input.is_action_just_pressed("Reverse Gear"):
 		drive_speed = -0.5
-
+		set_exhausts()
+		
+func set_exhausts():
+	if drive_speed <= 0:
+		for exhaust_flame in exhaust_flames:
+			exhaust_flame.set_idle()
+	if drive_speed > 0:
+		for exhaust_flame in exhaust_flames:
+			exhaust_flame.set_emission(drive_speed, top_speed)
+			
+func set_exhausts_power():
+	for exhaust_flame in exhaust_flames:
+		exhaust_flame.emitting = power
+	
+func toggle_power_utils():
+	set_exhausts_power()
+	if !power:
+		drive_speed = 0.5
+	set_exhausts()
+	
 func toggles():
 	if Input.is_action_just_pressed("toggle_lights"):
 		switch_headlights()
 	if Input.is_action_just_pressed("Vehicle Power"):
 		power = !power
+		toggle_power_utils()
 	toggle_doors()
 		
 func toggle_doors():

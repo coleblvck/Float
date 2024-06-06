@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://cg47dgyb7lbbq"]
+[gd_scene load_steps=9 format=3 uid="uid://cg47dgyb7lbbq"]
 
 [ext_resource type="PackedScene" uid="uid://j7a0tfil6ean" path="res://assets/models/vehicles/springtail/Springtail.glb" id="1_8o4t4"]
 [ext_resource type="Script" path="res://scenes/vehicles/Vehicle.gd" id="1_jnx0g"]
 [ext_resource type="Script" path="res://scenes/utilities/CameraPivot.gd" id="3_q5h45"]
 [ext_resource type="PackedScene" uid="uid://ciojgibbs27wt" path="res://scenes/utilities/PlayerCamera.tscn" id="4_xowwt"]
+[ext_resource type="PackedScene" uid="uid://bcrjdkahc1i0i" path="res://scenes/vehicles/ExhaustFlame.tscn" id="5_p8pny"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_jbwab"]
 points = PackedVector3Array(-0.596834, 0.651987, -0.504421, 0.758452, 0.926537, 0.666157, 0.413088, 0.817586, -1.52922, -0.359759, 1.38162, -0.270737, -0.141669, 0.685994, 1.39531, 0.321917, 0.562926, -0.226965, -0.254993, 1.12579, 1.34922, 0.364793, 1.38287, -0.225852, -0.306359, 1.07436, -1.47769, -0.757682, 0.926235, 0.669383, 0.155936, 1.38276, 0.937644, 0.577516, 0.781542, 1.15753, 0.758104, 0.784818, -0.656931, -0.758733, 0.926136, -0.6604, -0.281392, 0.737607, -1.46004, -0.511985, 1.33133, 0.474866, 0.464454, 1.07436, -1.32343, -0.456094, 0.608025, 0.550928, 0.258829, 1.12579, 1.34922, 0.51582, 1.33133, 0.474866, 0.229346, 1.38404, -0.590307, 0.416128, 0.606172, 0.646263, 0.139988, 0.605778, -1.01147, 0.8245, 0.766154, 0.680652, 0.759256, 0.926461, -0.657795, -0.575185, 0.780975, 1.16081, -0.759219, 0.735782, 0.385388, -0.226838, 0.562585, -0.501791, -0.0903002, 0.558681, 0.602385, -0.563351, 1.07436, -1.16949, -0.409252, 0.817586, -1.52922, -0.0895652, 1.43254, 0.230329)
@@ -13,8 +14,9 @@ points = PackedVector3Array(-0.596834, 0.651987, -0.504421, 0.758452, 0.926537, 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rvytn"]
 size = Vector3(3, 1, 4)
 
-[node name="Springtail" type="CharacterBody3D" node_paths=PackedStringArray("animation_player")]
+[node name="Springtail" type="CharacterBody3D" node_paths=PackedStringArray("headlights", "exhaust_flames", "animation_player")]
 script = ExtResource("1_jnx0g")
+headlights = [NodePath("Headlights/1"), NodePath("Headlights/2")]
 doors = {
 NodePath("Springtail/LeftDoor"): {
 "Animation": "LeftDoorOpen",
@@ -27,6 +29,7 @@ NodePath("Springtail/RightDoor"): {
 "Driver Door": false
 }
 }
+exhaust_flames = [NodePath("ExhaustFlames/TopLeft"), NodePath("ExhaustFlames/BottomLeft"), NodePath("ExhaustFlames/BottomRight"), NodePath("ExhaustFlames/TopRight")]
 animation_player = NodePath("Springtail/AnimationPlayer")
 
 [node name="Springtail" parent="." instance=ExtResource("1_8o4t4")]
@@ -61,14 +64,14 @@ shape = SubResource("BoxShape3D_rvytn")
 [node name="1" type="SpotLight3D" parent="Headlights"]
 transform = Transform3D(0.984808, 0, -0.173648, 0, 1, 0, 0.173648, 0, 0.984808, 0.3, 0.9, -1.3)
 visible = false
-light_energy = 200.0
+light_energy = 0.0
 spot_range = 4000.0
 spot_angle = 40.0
 
 [node name="2" type="SpotLight3D" parent="Headlights"]
 transform = Transform3D(0.984808, 0, 0.173648, 0, 1, 0, -0.173648, 0, 0.984808, -0.3, 0.9, -1.3)
 visible = false
-light_energy = 200.0
+light_energy = 0.0
 spot_range = 4000.0
 spot_angle = 40.0
 
@@ -78,5 +81,19 @@ follow_smooth_speed = 2.0
 
 [node name="PlayerCamera" parent="CameraPivot" instance=ExtResource("4_xowwt")]
 transform = Transform3D(1, 0, 0, 0, 0.876281, 0.4818, 0, -0.4818, 0.876281, 0, 3.66855, 4.756)
+
+[node name="ExhaustFlames" type="Node3D" parent="."]
+
+[node name="TopLeft" parent="ExhaustFlames" instance=ExtResource("5_p8pny")]
+transform = Transform3D(0.0494975, 0.0494975, 0, -0.0494975, 0.0494975, 0, 0, 0, 0.07, -0.365, 0.98, 1.5)
+
+[node name="BottomLeft" parent="ExhaustFlames" instance=ExtResource("5_p8pny")]
+transform = Transform3D(0.0494975, 0.0494975, 0, -0.0494975, 0.0494975, 0, 0, 0, 0.07, -0.365, 0.77, 1.5)
+
+[node name="BottomRight" parent="ExhaustFlames" instance=ExtResource("5_p8pny")]
+transform = Transform3D(0.0494975, 0.0494975, 0, -0.0494975, 0.0494975, 0, 0, 0, 0.07, 0.365, 0.77, 1.5)
+
+[node name="TopRight" parent="ExhaustFlames" instance=ExtResource("5_p8pny")]
+transform = Transform3D(0.0494975, 0.0494975, 0, -0.0494975, 0.0494975, 0, 0, 0, 0.07, 0.365, 0.98, 1.5)
 
 [editable path="Springtail"]

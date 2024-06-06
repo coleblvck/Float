@@ -12,7 +12,7 @@ func _ready():
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
 
 
@@ -50,10 +50,10 @@ func load_objects():
 		universe.add_child(planet)
 		
 func load_player(player_body :CharacterBody3D):
-	player_body.position = Vector3(32.19547, -65.00717, 2886.367)
+	player_body.position = Vector3(8.814234, -26.38371, 2949.491)
+	player_body.transform = Transform3D(Vector3(0.182997, -0.811642, 0.554752), Vector3(0.176324, -0.528034, -0.830717), Vector3(0.967172, 0.249834, 0.046483), Vector3(8.814234, -26.38371, 2949.491))
 	player_body.universe = universe
 	universe.add_child(player_body)
-
 
 func load_vehicle(vehicle :CharacterBody3D):
 	vehicle.position = Vector3(20.19547, -70.00717, 2886.367)

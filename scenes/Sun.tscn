@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://bfm43i5l8yajp"]
 
 [sub_resource type="Gradient" id="Gradient_dk67k"]
-offsets = PackedFloat32Array(0.646341, 0.987805, 1)
-colors = PackedColorArray(0.657809, 0.191916, 0.129851, 1, 0, 0, 0, 1, 1, 1, 1, 1)
+offsets = PackedFloat32Array(0, 0.426829, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.249527, 0.41119, 1, 1, 0.560955, 0.560955, 0.560955, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_pkqgd"]
 gradient = SubResource("Gradient_dk67k")
@@ -17,6 +17,7 @@ linear_accel_min = 1.0
 linear_accel_max = 5.0
 scale_min = 4.0
 scale_max = 40.0
+color = Color(1, 0.137255, 1, 1)
 color_initial_ramp = SubResource("GradientTexture1D_pkqgd")
 turbulence_noise_speed = Vector3(0, 1, 0)
 
@@ -25,7 +26,7 @@ transparency = 1
 blend_mode = 1
 shading_mode = 0
 vertex_color_use_as_albedo = true
-albedo_color = Color(0.375703, 0.223714, 0.110732, 1)
+albedo_color = Color(0.139175, 0.360541, 0.43347, 1)
 billboard_mode = 3
 billboard_keep_scale = true
 particles_anim_h_frames = 1
